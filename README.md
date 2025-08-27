@@ -8,7 +8,7 @@ It provides a robust, normalized database schema to handle various aspects of th
 
 ## 🛠️ Technology Stack
 - **Framework:** [AdonisJS](https://adonisjs.com/) (or a similar backend framework)
-- **Database:** PostgreSQL (or any relational database)
+- **Database:** PostgreSQL (via Docker Compose, or any relational database)
 - **ORM / Migrations:** Lucid ORM
 
 ---
@@ -44,9 +44,12 @@ The system’s core functionality is structured around the following database en
 
 ### ✅ Prerequisites
 - [Node.js](https://nodejs.org/) (LTS version)
-- [PostgreSQL](https://www.postgresql.org/) (or another supported relational database)
+- [Docker](https://docs.docker.com/get-docker/) + [Docker Compose](https://docs.docker.com/compose/)
+
+---
 
 ### 🔧 Installation
+
 Clone the repository:
 ```bash
 git clone https://github.com/Mowpey/csu_po.git
@@ -58,12 +61,30 @@ Install dependencies:
 npm install
 ```
 
-### 🗄️ Database Setup
-1. Configure your database connection in **`config/database.ts`**.
-2. Run database migrations to create the necessary tables:
-```bash
-node ace migrate
-```
+---
+
+### 🐳 Database Setup with Docker Compose
+
+1. Ensure you have Docker and Docker Compose installed.
+2. Start PostgreSQL using Docker Compose:
+   ```bash
+   docker-compose up -d
+   ```
+3. Update your database configuration in **`config/database.ts`** with the values from your `docker-compose.yml`.  
+   Example (default values if using standard setup):
+   ```ts
+   connection: {
+     host: 'localhost',
+     port: 5432,
+     user: 'postgres',
+     password: 'postgres',
+     database: 'test_db',
+   }
+   ```
+4. Run database migrations:
+   ```bash
+   node ace migrate
+   ```
 
 ---
 
