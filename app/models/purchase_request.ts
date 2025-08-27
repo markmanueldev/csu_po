@@ -68,6 +68,4 @@ export default class PurchaseRequest extends BaseModel {
 
   @column()
   declare comments: string
-
-
 }

@@ -3,7 +3,6 @@ import PurchaseRequest from '#models/purchase_request'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class TechnicalSpecification extends BaseModel {
-
   @column({ columnName: 'technical_specification_id', isPrimary: true })
   declare technicalSpecificationId: number
 
@@ -21,5 +20,4 @@ export default class TechnicalSpecification extends BaseModel {
 
   @belongsTo((): typeof PurchaseRequest => PurchaseRequest)
   declare purchaseRequest: BelongsTo<typeof PurchaseRequest>
-
 }
