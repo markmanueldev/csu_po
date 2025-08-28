@@ -24,8 +24,8 @@ export default class PurchaseRequest extends BaseModel {
   @column({ columnName: 'purchase_request_number' })
   declare purchaseRequestNumber: string
 
-  @column({ columnName: 'requestor_number' })
-  declare requestorNumber: string
+  @column({ columnName: 'requestor_name' })
+  declare requestorName: string
 
   @column({ columnName: 'contact_number' })
   declare contactNumber: string
@@ -54,14 +54,14 @@ export default class PurchaseRequest extends BaseModel {
   @column({ columnName: 'technical_working_group' })
   declare technicalWorkingGroup: string
 
-  @column()
-  declare purchaser: string
+  @column({ columnName: 'purchaser_name' })
+  declare purchaserName: string
 
-  @column()
-  declare approver: string
+  @column({ columnName: 'approver_name' })
+  declare approverName: string
 
-  @column({ columnName: 'early_procurement' })
-  declare earlyProcurement: boolean
+  @column({ columnName: 'is_early_procurement' })
+  declare isEarlyProcurement: boolean
 
   @column()
   declare purpose: string
