@@ -2,13 +2,14 @@ import { test } from '@japa/runner'
 import PurchaseRequest from '#models/purchase_request'
 import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_test_factory'
 import validator from 'validator'
+import testUtils from '@adonisjs/core/services/test_utils'
 
 // Creating Purchase Request  Object
 const purchaseRequestTest: PurchaseRequest = PurchaseRequestTestFactory()
 
 test.group('Add purchase requests', (group) => {
   group.each.setup(async () => {
-    console.log('')
+    await testUtils.db().truncate()
   })
   test('Test to insert purchase request in the database', async ({ assert }) => {
     await purchaseRequestTest.save()
