@@ -52,7 +52,11 @@ export default class PurchaseRequest extends BaseModel {
   declare fundingSource: string
 
   @column({ columnName: 'technical_working_group' })
-  declare technicalWorkingGroup: string
+  declare technicalWorkingGroup:
+    | 'ICT Equipment - DR. ALVIN B. ALONZO'
+    | 'Infrastructure and Construction - ENGR. JAMES B. BUSILAN'
+    | 'Goods and Supplies - MR. ELIJAH V. CRUZ'
+    | 'Auxiliary, Maintenance and General Services - MR. TERENCE ALFRED ROBERTO A. TEJADA'
 
   @column({ columnName: 'purchaser_name' })
   declare purchaserName: string
