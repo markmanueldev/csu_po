@@ -7,16 +7,16 @@ export default class TechnicalSpecification extends BaseModel {
   declare technicalSpecificationId: number
 
   @column({ columnName: 'delivery_requirement' })
-  declare deliveryRequirement: String
+  declare deliveryRequirement: string
 
   @column()
-  declare warranty: String
+  declare warranty: string
 
   @column()
-  declare inclusions: String
+  declare inclusions: string
 
   @column()
-  declare prototype: String
+  declare prototype: string
 
   @belongsTo((): typeof PurchaseRequest => PurchaseRequest)
   declare purchaseRequest: BelongsTo<typeof PurchaseRequest>

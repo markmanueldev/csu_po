@@ -10,10 +10,13 @@ export default class PurchaseRequestLog extends BaseModel {
   declare purchaseDate: Date
 
   @column()
-  declare user: String
+  declare status: string
 
   @column()
-  declare remarks: String
+  declare user: string
+
+  @column()
+  declare remarks: string
 
   @belongsTo((): typeof PurchaseRequest => PurchaseRequest)
   declare purchaseRequest: BelongsTo<typeof PurchaseRequest>

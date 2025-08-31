@@ -1,5 +1,13 @@
 import PurchaseRequest from '#models/purchase_request'
 import { PurchaseRequestInterface } from '../contracts/purchase_request_interface.js'
+import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_attachment_interface.js'
+import PurchaseRequestAttachment from '#models/purchase_request_attachment'
+import { PurchaseRequestItemInterface } from '../contracts/purchase_request_item_interface.js'
+import PurchaseRequestItem from '#models/purchase_request_item'
+import { TechnicalSpecificationInterface } from '../contracts/technical_specification_interface.js'
+import TechnicalSpecification from '#models/technical_specification'
+import { PurchaseRequestLogInterface } from '../contracts/purchase_request_log_interface.js'
+import PurchaseRequestLog from '#models/purchase_request_log'
 
 export class PurchaseRequestRepository {
   public async createPurchaseRequestInfo(
@@ -25,5 +33,54 @@ export class PurchaseRequestRepository {
     })
 
     return purchaseRequestForm
+  }
+
+  public async createPurchaseRequestItems(
+    serviceData: PurchaseRequestItemInterface
+  ): Promise<PurchaseRequestItem> {
+    const purchaseRequestItem: PurchaseRequestItem = await PurchaseRequestItem.create({
+      itemDescription: serviceData.itemDescription,
+      unitOfMeasure: serviceData.unitOfMeasure,
+      quantity: serviceData.quantity,
+      unitCost: serviceData.unitCost,
+      totalCost: serviceData.totalCost,
+      remarks: serviceData.remarks,
+    })
+
+    return purchaseRequestItem
+  }
+
+  public async createPurchaseRequestAttachments(
+    serviceData: PurchaseRequestAttachmentInterface[]
+  ): Promise<PurchaseRequestAttachment[]> {
+    const purchaseRequestAttachment: PurchaseRequestAttachment[] =
+      await PurchaseRequestAttachment.createMany(serviceData)
+
+    return purchaseRequestAttachment
+  }
+
+  public async createTechnicalSpecifications(
+    serviceData: TechnicalSpecificationInterface
+  ): Promise<TechnicalSpecification> {
+    const technicalSpecification: TechnicalSpecification = await TechnicalSpecification.create({
+      deliveryRequirement: serviceData.deliveryRequirement,
+      warranty: serviceData.warranty,
+      inclusions: serviceData.inclusions,
+      prototype: serviceData.prototype,
+    })
+    return technicalSpecification
+  }
+
+  public async createPurchaseRequestLogs(
+    serviceData: PurchaseRequestLogInterface
+  ): Promise<PurchaseRequestLog> {
+    const purchaseRequestLog: PurchaseRequestLog = await PurchaseRequestLog.create({
+      purchaseDate: serviceData.purchaseDate,
+      status: serviceData.status,
+      user: serviceData.user,
+      remarks: serviceData.remarks,
+    })
+
+    return purchaseRequestLog
   }
 }

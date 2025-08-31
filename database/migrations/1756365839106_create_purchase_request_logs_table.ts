@@ -12,6 +12,7 @@ export default class extends BaseSchema {
         .references('purchase_requests.purchase_request_id')
         .onDelete('CASCADE')
       table.date('purchase_date').notNullable()
+      table.string('status').notNullable()
       table.string('user').notNullable()
       table.text('remarks').nullable()
 
