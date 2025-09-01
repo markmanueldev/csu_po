@@ -21,9 +21,6 @@ export default class PurchaseRequest extends BaseModel {
   @column({ columnName: 'purchase_request_id', isPrimary: true })
   declare purchaseRequestId: number
 
-  @column({ columnName: 'purchase_request_number' })
-  declare purchaseRequestNumber: string
-
   @column({ columnName: 'requestor_name' })
   declare requestorName: string
 
@@ -57,9 +54,6 @@ export default class PurchaseRequest extends BaseModel {
     | 'Infrastructure and Construction - ENGR. JAMES B. BUSILAN'
     | 'Goods and Supplies - MR. ELIJAH V. CRUZ'
     | 'Auxiliary, Maintenance and General Services - MR. TERENCE ALFRED ROBERTO A. TEJADA'
-
-  @column({ columnName: 'purchaser_name' })
-  declare purchaserName: string
 
   @column({ columnName: 'approver_name' })
   declare approverName: string

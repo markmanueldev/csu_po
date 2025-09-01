@@ -6,7 +6,6 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('purchase_request_id').primary().notNullable()
-      table.string('purchase_request_number', 50).notNullable()
       table.string('requestor_name', 100).notNullable()
       table.string('contact_number', 20).notNullable()
       table.string('email_address', 255).notNullable().unique()
@@ -26,7 +25,6 @@ export default class extends BaseSchema {
           'Auxiliary, Maintenance and General Services - MR. TERENCE ALFRED ROBERTO A. TEJADA',
         ])
         .notNullable()
-      table.string('purchaser_name', 100).nullable()
       table.string('approver_name', 100).nullable()
       table.boolean('is_early_procurement')
       table.string('purpose', 255).notNullable()

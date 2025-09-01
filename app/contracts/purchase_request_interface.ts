@@ -1,5 +1,4 @@
 export interface PurchaseRequestInterface {
-  purchaseRequestNumber: string
   requestorName: string
   contactNumber: string
   emailAddress: string
@@ -14,7 +13,6 @@ export interface PurchaseRequestInterface {
     | 'Infrastructure and Construction - ENGR. JAMES B. BUSILAN'
     | 'Goods and Supplies - MR. ELIJAH V. CRUZ'
     | 'Auxiliary, Maintenance and General Services - MR. TERENCE ALFRED ROBERTO A. TEJADA'
-  purchaserName?: string
   approverName?: string
   isEarlyProcurement: boolean
   purpose: string

@@ -14,7 +14,6 @@ export class PurchaseRequestRepository {
     serviceData: PurchaseRequestInterface
   ): Promise<PurchaseRequest> {
     const purchaseRequestForm: PurchaseRequest = await PurchaseRequest.create({
-      purchaseRequestNumber: serviceData.purchaseRequestNumber,
       requestorName: serviceData.requestorName,
       contactNumber: serviceData.contactNumber,
       emailAddress: serviceData.emailAddress,
@@ -25,7 +24,6 @@ export class PurchaseRequestRepository {
       budgetClearance: serviceData.budgetClearance,
       fundingSource: serviceData.fundingSource,
       technicalWorkingGroup: serviceData.technicalWorkingGroup,
-      purchaserName: serviceData.purchaserName,
       approverName: serviceData.approverName,
       isEarlyProcurement: serviceData.isEarlyProcurement,
       purpose: serviceData.purpose,

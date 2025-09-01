@@ -16,7 +16,6 @@ test.group('Add purchase requests', (group) => {
 
     assert.isNotNull(purchaseRequestTest)
     assert.isNotNull(purchaseRequestTest.purchaseRequestId)
-    assert.equal(purchaseRequestTest.purchaseRequestNumber, 'PR-2025-001')
     assert.equal(purchaseRequestTest.requestorName, 'RN-001')
     assert.equal(purchaseRequestTest.contactNumber, '09460678123')
     assert.equal(purchaseRequestTest.office, 'IT Department')
@@ -25,7 +24,6 @@ test.group('Add purchase requests', (group) => {
     assert.equal(purchaseRequestTest.budgetClearance, 'Budget and Accounting')
     assert.equal(purchaseRequestTest.fundingSource, 'Trust Fund')
     assert.equal(purchaseRequestTest.technicalWorkingGroup, 'ICT Equipment - DR. ALVIN B. ALONZO')
-    assert.equal(purchaseRequestTest.purchaserName, 'Hector Valdez')
     assert.equal(purchaseRequestTest.approverName, 'Mark Angelo Manuel')
     assert.equal(purchaseRequestTest.isEarlyProcurement, false)
     assert.equal(purchaseRequestTest.purpose, 'Installing of CCTV')
