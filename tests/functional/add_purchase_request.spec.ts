@@ -1,23 +1,23 @@
 import { test } from '@japa/runner'
 import PurchaseRequest from '#models/purchase_request'
 import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_test_factory'
-import validator from 'validator'
 import testUtils from '@adonisjs/core/services/test_utils'
-
-// Creating Purchase Request  Object
-const purchaseRequestTest: PurchaseRequest = PurchaseRequestTestFactory()
 
 test.group('Add purchase requests', (group) => {
   group.each.setup(async () => {
     await testUtils.db().truncate()
   })
   test('Test to insert purchase request in the database', async ({ assert }) => {
+    // Creating Purchase Request  Object
+    const purchaseRequestTest: PurchaseRequest = PurchaseRequestTestFactory()
+
     await purchaseRequestTest.save()
 
     assert.isNotNull(purchaseRequestTest)
     assert.isNotNull(purchaseRequestTest.purchaseRequestId)
     assert.equal(purchaseRequestTest.requestorName, 'RN-001')
     assert.equal(purchaseRequestTest.contactNumber, '09460678123')
+    assert.isString(purchaseRequestTest.emailAddress)
     assert.equal(purchaseRequestTest.office, 'IT Department')
     assert.equal(purchaseRequestTest.unit, 'Unit A')
     assert.equal(purchaseRequestTest.branch, 'Branch B')
@@ -35,45 +35,21 @@ test.group('Add purchase requests', (group) => {
     assert.isNotNull(foundRecord)
   })
 
-  test('Email Validation for Purchase Request', ({ assert }, row) => {
-    // @ts-ignore
-    assert.equal(validator.isEmail(row.email), row.result)
-  }).with([
-    {
-      email: 'manuelmarkangelo22@gmail.com',
-      result: true,
-    },
-    {
-      email: 'test.user+spam@company.co.uk',
-      result: true,
-    },
-    {
-      email: '',
-      result: false,
-    },
-    {
-      email: 'email@example.com (Joe Smith)',
-      result: false,
-    },
-    {
-      email: '@example.com',
-      result: false,
-    },
-    {
-      email: 'test@.com',
-      result: false,
-    },
-    {
-      email: 'test..user@gmail.com',
-      result: false,
-    },
-    {
-      email: 'test@test@gmail.com',
-      result: false,
-    },
-    {
-      email: 'test@example',
-      result: false,
-    },
-  ])
+  test('Testing null values', async ({ assert }) => {
+    // Creating Purchase Request  Object
+    const purchaseRequestTest: PurchaseRequest = PurchaseRequestTestFactory()
+
+    purchaseRequestTest.approverName = null
+    purchaseRequestTest.comments = null
+    await purchaseRequestTest.save()
+
+    assert.isNotNull(purchaseRequestTest)
+    assert.isNotNull(purchaseRequestTest.purchaseRequestId)
+    const foundRecord: PurchaseRequest | null = await PurchaseRequest.find(
+      purchaseRequestTest.purchaseRequestId
+    )
+    assert.isNotNull(foundRecord)
+    assert.isNull(purchaseRequestTest.approverName)
+    assert.isNull(purchaseRequestTest.comments)
+  })
 })

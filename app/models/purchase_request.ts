@@ -56,7 +56,7 @@ export default class PurchaseRequest extends BaseModel {
     | 'Auxiliary, Maintenance and General Services - MR. TERENCE ALFRED ROBERTO A. TEJADA'
 
   @column({ columnName: 'approver_name' })
-  declare approverName: string
+  declare approverName: string | null
 
   @column({ columnName: 'is_early_procurement' })
   declare isEarlyProcurement: boolean
@@ -65,5 +65,5 @@ export default class PurchaseRequest extends BaseModel {
   declare purpose: string
 
   @column()
-  declare comments: string
+  declare comments: string | null
 }

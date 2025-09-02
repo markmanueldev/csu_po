@@ -9,4 +9,6 @@ export function PurchaseRequestAttachmentTestFactory() {
   purchaseRequestAttachment.documentType = 'PPMP'
   purchaseRequestAttachment.mimeType = 'pdf'
   purchaseRequestAttachment.uploadedAt = DateTime.fromJSDate(new Date(2025, 8, 29, 18, 16, 23))
+
+  return purchaseRequestAttachment
 }

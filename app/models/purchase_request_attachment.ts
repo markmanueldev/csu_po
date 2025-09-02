@@ -22,6 +22,9 @@ export default class PurchaseRequestAttachment extends BaseModel {
   @column.dateTime({ columnName: 'uploaded_at', autoCreate: true, autoUpdate: true })
   declare uploadedAt: DateTime
 
+  @column()
+  declare purchaseRequestId: number
+
   @belongsTo((): typeof PurchaseRequest => PurchaseRequest)
   declare purchaseRequest: BelongsTo<typeof PurchaseRequest>
 }

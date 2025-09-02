@@ -1,10 +1,11 @@
 import PurchaseRequest from '#models/purchase_request'
+import { faker } from '@faker-js/faker'
 
 export function PurchaseRequestTestFactory() {
   const purchaseRequest = new PurchaseRequest()
   purchaseRequest.requestorName = 'RN-001'
   purchaseRequest.contactNumber = '09460678123'
-  purchaseRequest.emailAddress = 'manuelmarkangelo22@gmail.com'
+  purchaseRequest.emailAddress = faker.internet.email()
   purchaseRequest.office = 'IT Department'
   purchaseRequest.unit = 'Unit A'
   purchaseRequest.branch = 'Branch B'

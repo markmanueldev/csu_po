@@ -16,7 +16,10 @@ export default class PurchaseRequestLog extends BaseModel {
   declare user: string
 
   @column()
-  declare remarks: string
+  declare remarks: string | null
+
+  @column()
+  declare purchaseRequestId: number
 
   @belongsTo((): typeof PurchaseRequest => PurchaseRequest)
   declare purchaseRequest: BelongsTo<typeof PurchaseRequest>
