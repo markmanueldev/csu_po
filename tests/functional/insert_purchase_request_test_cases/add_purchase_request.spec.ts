@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
-import PurchaseRequest from '#models/purchase_request'
-import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_test_factory'
+import PurchaseRequest from '#models/purchase_request_models/purchase_request'
+import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_test_factory'
 import testUtils from '@adonisjs/core/services/test_utils'
 
 test.group('Add purchase requests', (group) => {

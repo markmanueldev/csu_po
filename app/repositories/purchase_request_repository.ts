@@ -1,13 +1,13 @@
-import PurchaseRequest from '#models/purchase_request'
-import { PurchaseRequestInterface } from '../contracts/purchase_request_interface.js'
-import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_attachment_interface.js'
-import PurchaseRequestAttachment from '#models/purchase_request_attachment'
-import { PurchaseRequestItemInterface } from '../contracts/purchase_request_item_interface.js'
-import PurchaseRequestItem from '#models/purchase_request_item'
-import { TechnicalSpecificationInterface } from '../contracts/technical_specification_interface.js'
-import TechnicalSpecification from '#models/technical_specification'
-import { PurchaseRequestLogInterface } from '../contracts/purchase_request_log_interface.js'
-import PurchaseRequestLog from '#models/purchase_request_log'
+import PurchaseRequest from '#models/purchase_request_models/purchase_request'
+import { PurchaseRequestInterface } from '../contracts/purchase_request_contracts/purchase_request_interface.js'
+import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_contracts/purchase_request_attachment_interface.js'
+import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
+import { PurchaseRequestItemInterface } from '../contracts/purchase_request_contracts/purchase_request_item_interface.js'
+import PurchaseRequestItem from '#models/purchase_request_models/purchase_request_item'
+import { TechnicalSpecificationInterface } from '../contracts/purchase_request_contracts/technical_specification_interface.js'
+import TechnicalSpecification from '#models/purchase_request_models/technical_specification'
+import { PurchaseRequestLogInterface } from '../contracts/purchase_request_contracts/purchase_request_log_interface.js'
+import PurchaseRequestLog from '#models/purchase_request_models/purchase_request_log'
 
 export class PurchaseRequestRepository {
   public async createPurchaseRequestInfo(

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import TechnicalSpecification from '#models/technical_specification'
+import TechnicalSpecification from '#models/purchase_request_models/technical_specification'
 
 export function TechnicalSpecificationTestFactory() {
   const technicalSpecification = new TechnicalSpecification()

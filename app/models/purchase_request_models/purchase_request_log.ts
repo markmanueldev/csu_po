@@ -1,5 +1,5 @@
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import PurchaseRequest from '#models/purchase_request'
+import PurchaseRequest from '#models/purchase_request_models/purchase_request'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class PurchaseRequestLog extends BaseModel {

@@ -1,6 +1,6 @@
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import PurchaseRequest from '#models/purchase_request'
+import PurchaseRequest from '#models/purchase_request_models/purchase_request'
 
 export default class PurchaseRequestItem extends BaseModel {
   @column({ columnName: 'purchase_request_item_id', isPrimary: true })

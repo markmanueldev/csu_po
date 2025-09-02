@@ -1,4 +1,4 @@
-import PurchaseRequestAttachment from '#models/purchase_request_attachment'
+import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
 import { DateTime } from 'luxon'
 
 export function PurchaseRequestAttachmentTestFactory() {

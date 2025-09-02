@@ -1,9 +1,9 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
-import { PurchaseRequestLogTestFactory } from '#tests/factories/purchase_request_log_test_factory'
-import PurchaseRequestLog from '#models/purchase_request_log'
-import PurchaseRequest from '#models/purchase_request'
-import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_test_factory'
+import { PurchaseRequestLogTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_log_test_factory'
+import PurchaseRequestLog from '#models/purchase_request_models/purchase_request_log'
+import PurchaseRequest from '#models/purchase_request_models/purchase_request'
+import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_test_factory'
 import isDateObject from 'is-date-object'
 
 test.group('Add purchase request log', (group) => {

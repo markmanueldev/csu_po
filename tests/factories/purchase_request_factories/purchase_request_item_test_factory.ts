@@ -1,4 +1,4 @@
-import PurchaseRequestItem from '#models/purchase_request_item'
+import PurchaseRequestItem from '#models/purchase_request_models/purchase_request_item'
 import { faker } from '@faker-js/faker'
 
 export function PurchaseRequestItemTestFactory() {

@@ -1,9 +1,9 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
-import TechnicalSpecification from '#models/technical_specification'
-import { TechnicalSpecificationTestFactory } from '#tests/factories/technical_specification_test_factory'
-import PurchaseRequest from '#models/purchase_request'
-import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_test_factory'
+import TechnicalSpecification from '#models/purchase_request_models/technical_specification'
+import { TechnicalSpecificationTestFactory } from '#tests/factories/purchase_request_factories/technical_specification_test_factory'
+import PurchaseRequest from '#models/purchase_request_models/purchase_request'
+import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_test_factory'
 
 test.group('Add technical specification', (group) => {
   group.each.setup(async () => {

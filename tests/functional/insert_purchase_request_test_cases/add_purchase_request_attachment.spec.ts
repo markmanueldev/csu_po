@@ -1,9 +1,9 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
-import { PurchaseRequestAttachmentTestFactory } from '#tests/factories/purchase_request_attachment_test_factory'
-import PurchaseRequestAttachment from '#models/purchase_request_attachment'
-import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_test_factory'
-import PurchaseRequest from '#models/purchase_request'
+import { PurchaseRequestAttachmentTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_attachment_test_factory'
+import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
+import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_test_factory'
+import PurchaseRequest from '#models/purchase_request_models/purchase_request'
 import { DateTime } from 'luxon'
 
 test.group('Add purchase request attachments', (group) => {

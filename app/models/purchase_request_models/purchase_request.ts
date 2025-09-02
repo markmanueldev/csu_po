@@ -1,9 +1,9 @@
 import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
-import PurchaseRequestAttachment from '#models/purchase_request_attachment'
+import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
 import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
-import TechnicalSpecification from '#models/technical_specification'
-import PurchaseRequestItem from '#models/purchase_request_item'
-import PurchaseRequestLog from '#models/purchase_request_log'
+import TechnicalSpecification from '#models/purchase_request_models/technical_specification'
+import PurchaseRequestItem from '#models/purchase_request_models/purchase_request_item'
+import PurchaseRequestLog from '#models/purchase_request_models/purchase_request_log'
 
 export default class PurchaseRequest extends BaseModel {
   @hasMany((): typeof PurchaseRequestAttachment => PurchaseRequestAttachment)
