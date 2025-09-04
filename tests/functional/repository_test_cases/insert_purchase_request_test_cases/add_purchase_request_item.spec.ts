@@ -1,9 +1,9 @@
 import { test } from '@japa/runner'
 import testUtils from '@adonisjs/core/services/test_utils'
-import { PurchaseRequestItemTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_item_test_factory'
+import { PurchaseRequestItemTestFactory } from '../../../factories/purchase_request_repo_factories/purchase_request_item_test_factory.js'
 import PurchaseRequestItem from '#models/purchase_request_models/purchase_request_item'
 import PurchaseRequest from '#models/purchase_request_models/purchase_request'
-import { PurchaseRequestTestFactory } from '#tests/factories/purchase_request_factories/purchase_request_test_factory'
+import { PurchaseRequestTestFactory } from '../../../factories/purchase_request_repo_factories/purchase_request_test_factory.js'
 
 test.group('Add purchase request item', (group) => {
   group.each.setup(async () => {
