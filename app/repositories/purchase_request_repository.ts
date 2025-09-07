@@ -1,5 +1,5 @@
 import PurchaseRequest from '#models/purchase_request_models/purchase_request'
-import { PurchaseRequestInterface } from '../contracts/purchase_request_contracts/purchase_request_interface.js'
+import { PurchaseRequestInterface } from '../contracts/purchase_request_contracts/purchase_request_api_interface.js'
 import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_contracts/purchase_request_attachment_interface.js'
 import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
 import { PurchaseRequestItemInterface } from '../contracts/purchase_request_contracts/purchase_request_item_interface.js'

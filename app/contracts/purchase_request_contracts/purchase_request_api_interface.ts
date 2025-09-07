@@ -1,11 +1,11 @@
-export interface PurchaseRequestInterface {
+export interface PurchaseRequestAPIInterface {
   requestorName: string
   contactNumber: string
   emailAddress: string
   office: string
   unit: string
   branch: string
-  purchaseRequestDate: Date
+  purchaseRequestDate: string
   budgetClearance: 'Budget and Accounting' | 'Accounting Only' | 'Budget Only'
   fundingSource: string
   technicalWorkingGroup:
@@ -13,8 +13,8 @@ export interface PurchaseRequestInterface {
     | 'Infrastructure and Construction - ENGR. JAMES B. BUSILAN'
     | 'Goods and Supplies - MR. ELIJAH V. CRUZ'
     | 'Auxiliary, Maintenance and General Services - MR. TERENCE ALFRED ROBERTO A. TEJADA'
-  approverName?: string
+  approverName?: string | null
   isEarlyProcurement: boolean
   purpose: string
-  comments?: string
+  comments?: string | null
 }

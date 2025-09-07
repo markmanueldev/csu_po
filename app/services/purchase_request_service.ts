@@ -2,7 +2,7 @@ import { inject } from '@adonisjs/core'
 import { Logger } from '@adonisjs/core/logger'
 import { PurchaseRequestRepository } from '../repositories/purchase_request_repository.js'
 import PurchaseRequest from '#models/purchase_request_models/purchase_request'
-import { PurchaseRequestInterface } from '../contracts/purchase_request_contracts/purchase_request_interface.js'
+import { PurchaseRequestDatabaseInterface } from '../contracts/purchase_request_contracts/purchase_request_database_interface.js'
 
 @inject()
 export class PurchaseRequestService {
@@ -11,7 +11,7 @@ export class PurchaseRequestService {
     protected logger: Logger
   ) {}
 
-  public async createPurchaseRequest(controllerData: PurchaseRequestInterface) {
+  public async createPurchaseRequest(controllerData: PurchaseRequestDatabaseInterface) {
     try {
       const onlyPurchaseRequestInfo: PurchaseRequest =
         await this.purchaseRequestRepository.createPurchaseRequestInfo(controllerData)

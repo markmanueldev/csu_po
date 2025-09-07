@@ -27,7 +27,7 @@ export const createPurchaseRequestValidator = vine.compile(
       'Auxiliary, Maintenance and General Services - MR. TERENCE ALFRED ROBERTO A. TEJADA',
     ]),
     approverName: vine.string().trim().escape().maxLength(100).nullable(),
-    isEarlyProcurement: vine.boolean({ strict: true }),
+    isEarlyProcurement: vine.boolean(),
     purpose: vine.string().trim().escape().maxLength(255),
     comments: vine.string().trim().nullable(),
   })

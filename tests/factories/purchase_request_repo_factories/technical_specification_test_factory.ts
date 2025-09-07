@@ -3,7 +3,7 @@ import TechnicalSpecification from '#models/purchase_request_models/technical_sp
 
 export function TechnicalSpecificationTestFactory() {
   const technicalSpecification = new TechnicalSpecification()
-  technicalSpecification.deliveryRequirement = faker.lorem.paragraph()
+  technicalSpecification.deliveryRequirement = faker.lorem.sentence()
   technicalSpecification.warranty = faker.lorem.paragraph()
   technicalSpecification.inclusions = faker.lorem.paragraph()
   technicalSpecification.prototype = faker.lorem.paragraph()

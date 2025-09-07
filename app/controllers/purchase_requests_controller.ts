@@ -4,9 +4,9 @@ import { inject } from '@adonisjs/core'
 import { PurchaseRequestService } from '#services/purchase_request_service'
 import { HttpContext } from '@adonisjs/core/http'
 import { Logger } from '@adonisjs/core/logger'
-import { PurchaseRequestInterface } from '../contracts/purchase_request_contracts/purchase_request_interface.js'
 import { createPurchaseRequestValidator } from '#validators/purchase_request_validation'
 import PurchaseRequest from '#models/purchase_request_models/purchase_request'
+import { errors } from '@vinejs/vine'
 
 @inject()
 export default class PurchaseRequestsController {
@@ -16,23 +16,15 @@ export default class PurchaseRequestsController {
   ) {}
 
   public async storePurchaseRequest({ request, response }: HttpContext) {
-    this.logger.info('Purchase request info', request.body())
-
     try {
       const validateData = await createPurchaseRequestValidator.validate(request.body())
-      const data: PurchaseRequestInterface = validateData as PurchaseRequestInterface
       const createPurchaseRequestService: PurchaseRequest =
-        await this.purchaseRequestService.createPurchaseRequest(data)
+        await this.purchaseRequestService.createPurchaseRequest(validateData)
       return response.status(201).json(createPurchaseRequestService)
     } catch (error) {
-      if (error.status === 400) {
-        this.logger.error('Bad Request: Validation failed for purchase request.', {
-          errors: error.messages,
-        })
-        return response.status(400).send('Bad Request: Validation failed for purchase request.')
+      if (error instanceof errors.E_VALIDATION_ERROR) {
+        console.log(error.messages)
       }
-
-      this.logger.error('Bad Request: Failed to create purchase request due to server error', error)
     }
   }
 }
