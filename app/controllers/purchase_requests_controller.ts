@@ -17,13 +17,13 @@ export default class PurchaseRequestsController {
 
   public async storePurchaseRequest({ request, response }: HttpContext) {
     try {
-      const validateData = await createPurchaseRequestValidator.validate(request.body())
-      const createPurchaseRequestService: PurchaseRequest =
-        await this.purchaseRequestService.createPurchaseRequest(validateData)
-      return response.status(201).json(createPurchaseRequestService)
+      // const validateData = await createPurchaseRequestValidator.validate(request.body())
+      // const createPurchaseRequestService: PurchaseRequest =
+      //   await this.purchaseRequestService.createPurchaseRequest(validateData)
+      // return response.status(201).json(createPurchaseRequestService)
     } catch (error) {
       if (error instanceof errors.E_VALIDATION_ERROR) {
-        console.log(error.messages)
+        this.logger.error(error.messages)
       }
     }
   }

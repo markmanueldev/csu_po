@@ -1,5 +1,5 @@
 import PurchaseRequest from '#models/purchase_request_models/purchase_request'
-import { PurchaseRequestInterface } from '../contracts/purchase_request_contracts/purchase_request_api_interface.js'
+import { PurchaseRequestDatabaseInterface } from '../contracts/purchase_request_contracts/purchase_request_database_interface.js'
 import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_contracts/purchase_request_attachment_interface.js'
 import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
 import { PurchaseRequestItemInterface } from '../contracts/purchase_request_contracts/purchase_request_item_interface.js'
@@ -11,7 +11,7 @@ import PurchaseRequestLog from '#models/purchase_request_models/purchase_request
 
 export class PurchaseRequestRepository {
   public async createPurchaseRequestInfo(
-    serviceData: PurchaseRequestInterface
+    serviceData: PurchaseRequestDatabaseInterface
   ): Promise<PurchaseRequest> {
     const purchaseRequestForm: PurchaseRequest = await PurchaseRequest.create({
       requestorName: serviceData.requestorName,
@@ -34,16 +34,10 @@ export class PurchaseRequestRepository {
   }
 
   public async createPurchaseRequestItems(
-    serviceData: PurchaseRequestItemInterface
-  ): Promise<PurchaseRequestItem> {
-    const purchaseRequestItem: PurchaseRequestItem = await PurchaseRequestItem.create({
-      itemDescription: serviceData.itemDescription,
-      unitOfMeasure: serviceData.unitOfMeasure,
-      quantity: serviceData.quantity,
-      unitCost: serviceData.unitCost,
-      totalCost: serviceData.totalCost,
-      remarks: serviceData.remarks,
-    })
+    serviceData: PurchaseRequestItemInterface[]
+  ): Promise<PurchaseRequestItem[]> {
+    const purchaseRequestItem: PurchaseRequestItem[] =
+      await PurchaseRequestItem.createMany(serviceData)
 
     return purchaseRequestItem
   }
