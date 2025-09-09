@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker'
 import { PurchaseRequestAPIInterface } from '../../../app/contracts/purchase_request_contracts/purchase_request_api_interface.js'
 import { DateTime } from 'luxon'
-import { normalizeEmail } from 'validator'
+import validator from 'validator'
 
 export function PurchaseRequestFormFactory(): PurchaseRequestAPIInterface {
   const form = {
     requestorName: faker.person.fullName(),
     contactNumber: '09460678123',
-    emailAddress: normalizeEmail(faker.internet.email()),
+    emailAddress: validator.normalizeEmail(faker.internet.email()),
     office: faker.lorem.sentence(),
     unit: faker.lorem.sentence({ min: 1, max: 4 }),
     branch: faker.lorem.sentence(),
