@@ -5,6 +5,7 @@ vine.convertEmptyStringsToNull = true
 
 export const createPurchaseRequestValidator = vine.compile(
   vine.object({
+    // Purchase Request Only Properties
     requestorName: vine.string().trim().escape().maxLength(100),
     contactNumber: vine.string().trim().escape().maxLength(11),
     emailAddress: vine
@@ -28,7 +29,26 @@ export const createPurchaseRequestValidator = vine.compile(
     ]),
     approverName: vine.string().trim().escape().maxLength(100).nullable(),
     isEarlyProcurement: vine.boolean(),
+    //Technical Specifications Properties
     purpose: vine.string().trim().escape().maxLength(255),
     comments: vine.string().trim().nullable(),
+    deliveryRequirement: vine.string().trim().escape().maxLength(150).nullable(),
+    warranty: vine.string().trim().escape().maxLength(255).nullable(),
+    // Purchase Request Logs Properties
+    purchaseDate: vine.date(),
+    status: vine.string().trim().escape().maxLength(100).nullable(),
+    user: vine.string().trim().escape().maxLength(150).nullable(),
+    remarks: vine.string().trim().escape().nullable(),
+    //Purchase Request Items
+    purchaseRequestItems: vine.array(
+      vine.object({
+        itemDescription: vine.string().trim().escape().maxLength(255),
+        unitOfMeasure: vine.enum(['PC', 'Box', 'Set', 'Lot']),
+        quantity: vine.number(),
+        unitCost: vine.number(),
+        totalCost: vine.number(),
+        remarks: vine.string().trim().escape().maxLength(255).nullable(),
+      })
+    ),
   })
 )

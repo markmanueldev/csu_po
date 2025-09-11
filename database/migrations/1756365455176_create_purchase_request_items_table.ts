@@ -16,7 +16,7 @@ export default class extends BaseSchema {
       table.integer('quantity').notNullable()
       table.decimal('unit_cost').notNullable()
       table.decimal('total_cost').notNullable()
-      table.text('remarks').notNullable()
+      table.text('remarks').nullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

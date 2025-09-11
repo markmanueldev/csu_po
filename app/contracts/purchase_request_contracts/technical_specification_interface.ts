@@ -1,6 +1,6 @@
 export interface TechnicalSpecificationInterface {
-  deliveryRequirement: string
-  warranty: string
-  inclusions: string
-  prototype: string
+  deliveryRequirement: string | null
+  warranty: string | null
+  inclusions: string | null
+  prototype: string | null
 }
