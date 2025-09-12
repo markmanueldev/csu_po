@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { PurchaseRequestFormFactory } from '#tests/factories/purchase_request_api_factories/purchase_request_api_test_factory'
+import { PurchaseRequestFormFactory } from '#tests/factories/purchase_request_api_factories/purchase_request_controller_test_factory'
 import { PurchaseRequestAPIInterface } from '../../../app/contracts/purchase_request_contracts/purchase_request_api_interface.js'
 import { ApiResponse } from '@japa/api-client'
 

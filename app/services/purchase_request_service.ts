@@ -7,7 +7,6 @@ import TechnicalSpecification from '#models/purchase_request_models/technical_sp
 import PurchaseRequestLog from '#models/purchase_request_models/purchase_request_log'
 import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
 import PurchaseRequestItem from '#models/purchase_request_models/purchase_request_item'
-import { PurchaseRequestItemInterface } from '../contracts/purchase_request_contracts/purchase_request_item_interface.js'
 
 @inject()
 export class PurchaseRequestService {
@@ -33,24 +32,54 @@ export class PurchaseRequestService {
         isEarlyProcurement: controllerData.isEarlyProcurement,
         purpose: controllerData.purpose,
         comments: controllerData.comments as string | null,
-      }
+      } as PurchaseRequest
 
       const technicalSpecification: TechnicalSpecification = {
         deliveryRequirement: controllerData.deliveryRequirement,
         warranty: controllerData.warranty,
         inclusions: controllerData.inclusions,
         prototype: controllerData.prototype,
-      }
+      } as TechnicalSpecification
 
       const purchaseRequestLogs: PurchaseRequestLog = {
         purchaseDate: controllerData.purchaseDate,
         status: controllerData.status,
         user: controllerData.user,
         remarks: controllerData.remarks,
-      }
+      } as PurchaseRequestLog
 
-      const purchaseRequestItems: PurchaseRequestItemInterface[] =
-        controllerData.purchaseRequestItems
+      const purchaseRequestItems: PurchaseRequestItem[] =
+        controllerData.purchaseRequestItems as PurchaseRequestItem[]
+
+      const purchaseRequestAttachments: PurchaseRequestAttachment[] = await this.uploadAttachments(
+        controllerData.purchaseRequestAttachments as PurchaseRequestAttachment[]
+      )
+
+      //Insert Purchase Request Info
+      const insertPurchaseRequestInfo: PurchaseRequest =
+        await this.purchaseRequestRepository.createPurchaseRequestInfo(purchaseRequestOnly)
+      //Insert Technical Specification
+      const insertTechnicalSpecification: TechnicalSpecification =
+        await this.purchaseRequestRepository.createTechnicalSpecifications(technicalSpecification)
+      //Insert Purchase Request Logs
+      const insertPurchaseRequestLogs: PurchaseRequestLog =
+        await this.purchaseRequestRepository.createPurchaseRequestLogs(purchaseRequestLogs)
+      //Insert Purchase Request Items
+      const insertPurchaseRequestItems: PurchaseRequestItem[] =
+        await this.purchaseRequestRepository.createPurchaseRequestItems(purchaseRequestItems)
+      //Insert Purchase Request Attachments
+      // const insertPurchaseRequestAttachments: PurchaseRequestAttachment[] =
+      //   await this.purchaseRequestRepository.createPurchaseRequestAttachments(
+      //     purchaseRequestAttachments
+      //   )
+
+      return {
+        purchaseRequestInfo: insertPurchaseRequestInfo,
+        technicalSpecification: insertTechnicalSpecification,
+        purchaseRequestLogs: insertPurchaseRequestLogs,
+        purchaseRequestItems: insertPurchaseRequestItems,
+        // purchaseRequestAttachments: insertPurchaseRequestAttachments,
+      }
     } catch (error) {
       this.logger.error('Failed to create Purchase Request', {
         error: error.message,
@@ -60,5 +89,7 @@ export class PurchaseRequestService {
     }
   }
 
-  public async uploadAttachments(attachments: PurchaseRequestAttachment[]) {}
+  public async uploadAttachments(attachments: PurchaseRequestAttachment[]) {
+    this.logger.info('Uploaded Attachments', attachments)
+  }
 }

@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
-import { PurchaseRequestInterface } from '../../../app/contracts/purchase_request_contracts/purchase_request_api_interface.js'
-import { PurchaseRequestFormFactory } from '#tests/factories/purchase_request_api_factories/purchase_request_api_test_factory'
+import { PurchaseRequestServiceInterface } from '../../../app/contracts/purchase_request_service_contracts/purchase_request_service_interface.js'
+import { PurchaseRequestFormServiceFactory } from '#tests/factories/purchase_request_api_factories/purchase_request_service_factory'
 import testUtils from '@adonisjs/core/services/test_utils'
 import { PurchaseRequestService } from '#services/purchase_request_service'
 import PurchaseRequest from '#models/purchase_request_models/purchase_request'
@@ -14,11 +14,11 @@ test.group('Service test cases insert purchase request service test', (group) =>
   })
 
   test('Testing create purchase request from the service', async ({ assert }) => {
-    const payload: PurchaseRequestInterface = PurchaseRequestFormFactory()
+    const payload: PurchaseRequestServiceInterface = PurchaseRequestFormServiceFactory()
 
     class FakeRepository extends PurchaseRequestRepository {
       async createPurchaseRequestInfo(
-        serviceData: PurchaseRequestInterface
+        serviceData: PurchaseRequestServiceInterface
       ): Promise<PurchaseRequest> {
         return super.createPurchaseRequestInfo(serviceData)
       }
@@ -38,10 +38,13 @@ test.group('Service test cases insert purchase request service test', (group) =>
       return new FakeLogger() as unknown as Logger
     })
 
-    const service = await app.container.make(PurchaseRequestService)
+    const service: PurchaseRequestService = await app.container.make(PurchaseRequestService)
     const testCreatePurchaseRequest = await service.createPurchaseRequest(payload)
 
-    assert.exists(testCreatePurchaseRequest.purchaseRequestId)
+    //Continue destructuring
+    const { purchaseRequestInfo } = testCreatePurchaseRequest
+
+    assert.exists(purchaseRequestInfo.purchaseRequestId)
     assert.deepInclude(testCreatePurchaseRequest, payload)
   })
 })
