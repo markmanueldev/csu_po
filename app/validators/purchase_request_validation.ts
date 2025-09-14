@@ -3,7 +3,7 @@ import vine from '@vinejs/vine'
 //Make empty form inputs to null
 vine.convertEmptyStringsToNull = true
 
-export const createPurchaseRequestValidator = vine.compile(
+export const purchaseRequestBodyValidator = vine.compile(
   vine.object({
     // Purchase Request Only Properties
     requestorName: vine.string().trim().escape().maxLength(100),
@@ -29,15 +29,17 @@ export const createPurchaseRequestValidator = vine.compile(
     ]),
     approverName: vine.string().trim().escape().maxLength(100).nullable(),
     isEarlyProcurement: vine.boolean(),
-    //Technical Specifications Properties
     purpose: vine.string().trim().escape().maxLength(255),
     comments: vine.string().trim().nullable(),
+    //Technical Specifications Properties
     deliveryRequirement: vine.string().trim().escape().maxLength(150).nullable(),
     warranty: vine.string().trim().escape().maxLength(255).nullable(),
+    inclusions: vine.string().trim().escape().maxLength(255).nullable(),
+    prototype: vine.string().trim().escape().maxLength(255).nullable(),
     // Purchase Request Logs Properties
     purchaseDate: vine.date(),
-    status: vine.string().trim().escape().maxLength(100).nullable(),
-    user: vine.string().trim().escape().maxLength(150).nullable(),
+    status: vine.string().trim().escape().maxLength(100),
+    user: vine.string().trim().escape().maxLength(150),
     remarks: vine.string().trim().escape().nullable(),
     //Purchase Request Items
     purchaseRequestItems: vine.array(
@@ -48,6 +50,20 @@ export const createPurchaseRequestValidator = vine.compile(
         unitCost: vine.number(),
         totalCost: vine.number(),
         remarks: vine.string().trim().escape().maxLength(255).nullable(),
+      })
+    ),
+  })
+)
+
+export const purchaseRequestFileValidator = vine.compile(
+  vine.object({
+    purchaseRequestAttachments: vine.array(
+      vine.object({
+        fileName: vine.string().trim().escape().maxLength(100).nullable(),
+        storagePath: vine.string().trim().escape(),
+        documentType: vine.enum(['PPMP', 'Price Quotation', 'Supporting Documents']),
+        mimeType: vine.string().trim().escape().maxLength(100),
+        uploadedAt: vine.date(),
       })
     ),
   })

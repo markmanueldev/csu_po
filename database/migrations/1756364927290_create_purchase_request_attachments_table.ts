@@ -12,7 +12,7 @@ export default class extends BaseSchema {
         .references('purchase_requests.purchase_request_id')
         .onDelete('CASCADE')
       table.string('file_name', 100).nullable()
-      table.string('storage_path', 100).notNullable()
+      table.string('storage_path').notNullable()
       table.enu('document_type', ['PPMP', 'Price Quotation', 'Supporting Documents']).notNullable()
       table.string('mime_type', 100).notNullable()
       table.dateTime('uploaded_at', { useTz: true }).notNullable().defaultTo(this.now())

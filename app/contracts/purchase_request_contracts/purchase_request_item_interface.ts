@@ -4,5 +4,5 @@ export interface PurchaseRequestItemInterface {
   quantity: number
   unitCost: number
   totalCost: number
-  remarks: string
+  remarks: string | null
 }

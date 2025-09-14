@@ -4,9 +4,14 @@ import { inject } from '@adonisjs/core'
 import { PurchaseRequestService } from '#services/purchase_request_service'
 import { HttpContext } from '@adonisjs/core/http'
 import { Logger } from '@adonisjs/core/logger'
-import { createPurchaseRequestValidator } from '#validators/purchase_request_validation'
-import PurchaseRequest from '#models/purchase_request_models/purchase_request'
+import {
+  purchaseRequestBodyValidator,
+  purchaseRequestFileValidator,
+} from '#validators/purchase_request_validation'
 import { errors } from '@vinejs/vine'
+import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_contracts/purchase_request_attachment_interface.js'
+import { FileParser } from '../helpers/file_attachment_converters.js'
+import { DateTime } from 'luxon'
 
 @inject()
 export default class PurchaseRequestsController {
@@ -17,10 +22,48 @@ export default class PurchaseRequestsController {
 
   public async storePurchaseRequest({ request, response }: HttpContext) {
     try {
-      // const validateData = await createPurchaseRequestValidator.validate(request.body())
-      // const createPurchaseRequestService: PurchaseRequest =
-      //   await this.purchaseRequestService.createPurchaseRequest(validateData)
-      // return response.status(201).json(createPurchaseRequestService)
+      //Validate Request Body
+      const validateBodyData = await purchaseRequestBodyValidator.validate(request.body())
+
+      //Validate Request Files ** STRICTLY PDF FILES OR DOCUMENT FILES ONLY **
+      let mapFilesToAttachment: PurchaseRequestAttachmentInterface[] = []
+      const ppmpFile = request.file('ppmp', {
+        size: '20mb',
+        extnames: ['pdf', 'docx', 'odt', 'doc'],
+      })
+      const priceQuotationFile = request.file('priceQuotation', {
+        size: '20mb',
+        extnames: ['pdf', 'docx', 'odt', 'doc'],
+      })
+      const supportingDocumentFile = request.file('supportingDocumentFile', {
+        size: '20mb',
+        extnames: ['pdf', 'docx', 'odt', 'doc'],
+      })
+
+      if (ppmpFile) {
+        mapFilesToAttachment.push(await FileParser(ppmpFile))
+      }
+      if (priceQuotationFile) {
+        mapFilesToAttachment.push(await FileParser(priceQuotationFile))
+      }
+      if (supportingDocumentFile) {
+        mapFilesToAttachment.push(await FileParser(supportingDocumentFile))
+      }
+      const firstValidationFileData =
+        await purchaseRequestFileValidator.validate(mapFilesToAttachment)
+      const finalValidatedFileData = {
+        purchaseRequestAttachments: firstValidationFileData.purchaseRequestAttachments.map(
+          (attachment) => ({
+            ...attachment,
+            uploadedAt: DateTime.fromJSDate(attachment.uploadedAt),
+          })
+        ),
+      }
+
+      const createPurchaseRequestService = await this.purchaseRequestService.createPurchaseRequest(
+        Object.assign(validateBodyData, finalValidatedFileData)
+      )
+      return response.status(201).json(createPurchaseRequestService)
     } catch (error) {
       if (error instanceof errors.E_VALIDATION_ERROR) {
         this.logger.error(error.messages)
