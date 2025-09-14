@@ -19,7 +19,7 @@ export function PurchaseRequestFormServiceFactory(): PurchaseRequestServiceInter
     isEarlyProcurement: false,
     purpose: faker.lorem.paragraph(),
     comments: faker.lorem.paragraph(),
-    deliveryRequirement: faker.lorem.paragraph(),
+    deliveryRequirement: faker.lorem.sentences({ min: 1, max: 2 }),
     warranty: faker.lorem.paragraph(),
     inclusions: faker.lorem.paragraph(),
     prototype: faker.lorem.paragraph(),
@@ -29,7 +29,7 @@ export function PurchaseRequestFormServiceFactory(): PurchaseRequestServiceInter
     remarks: faker.lorem.paragraph(),
     purchaseRequestItems: [
       {
-        itemDescription: faker.lorem.sentences(),
+        itemDescription: faker.lorem.sentences({ min: 1, max: 2 }),
         unitOfMeasure: 'PC',
         quantity: faker.number.int(100),
         unitCost: faker.number.float({ fractionDigits: 2 }),
@@ -37,7 +37,7 @@ export function PurchaseRequestFormServiceFactory(): PurchaseRequestServiceInter
         remarks: faker.lorem.paragraph(),
       },
       {
-        itemDescription: faker.lorem.sentences(),
+        itemDescription: faker.lorem.sentences({ min: 1, max: 2 }),
         unitOfMeasure: 'Box',
         quantity: faker.number.int(100),
         unitCost: faker.number.float({ fractionDigits: 2 }),
@@ -45,7 +45,7 @@ export function PurchaseRequestFormServiceFactory(): PurchaseRequestServiceInter
         remarks: faker.lorem.paragraph(),
       },
       {
-        itemDescription: faker.lorem.sentences(),
+        itemDescription: faker.lorem.sentences({ min: 1, max: 2 }),
         unitOfMeasure: 'Set',
         quantity: faker.number.int(100),
         unitCost: faker.number.float({ fractionDigits: 2 }),
@@ -53,7 +53,7 @@ export function PurchaseRequestFormServiceFactory(): PurchaseRequestServiceInter
         remarks: faker.lorem.paragraph(),
       },
       {
-        itemDescription: faker.lorem.sentences(),
+        itemDescription: faker.lorem.sentences({ min: 1, max: 2 }),
         unitOfMeasure: 'Lot',
         quantity: faker.number.int(100),
         unitCost: faker.number.float({ fractionDigits: 2 }),
