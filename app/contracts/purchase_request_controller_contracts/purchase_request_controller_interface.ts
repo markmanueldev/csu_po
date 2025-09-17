@@ -7,7 +7,8 @@ import { PurchaseRequestLogInterface } from '../purchase_request_contracts/purch
 export interface PurchaseRequestControllerInterface
   extends PurchaseRequestAPIInterface,
     TechnicalSpecificationInterface,
-    PurchaseRequestLogInterface {
+    Omit<PurchaseRequestLogInterface, 'purchaseDate'> {
+  purchaseDate: string | null
   purchaseRequestItems: PurchaseRequestItemInterface[]
   purchaseRequestAttachments: PurchaseRequestAttachmentInterface[]
 }

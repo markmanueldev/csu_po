@@ -46,6 +46,7 @@ test.group('Service test cases insert purchase request service test', (group) =>
       purchaseRequestLogs,
       purchaseRequestItems,
       technicalSpecification,
+      purchaseRequestAttachments,
     } = testCreatePurchaseRequest
 
     purchaseRequestLogs.purchaseRequestId = purchaseRequestInfo.purchaseRequestId
@@ -61,6 +62,12 @@ test.group('Service test cases insert purchase request service test', (group) =>
       item.purchaseRequestId = purchaseRequestInfo.purchaseRequestId
       assert.exists(item.purchaseRequestItemId)
       assert.exists(item.purchaseRequestId)
+    }
+
+    for (const attachment of purchaseRequestAttachments) {
+      attachment.purchaseRequestId = purchaseRequestInfo.purchaseRequestId
+      assert.exists(attachment.purchaseRequestId)
+      assert.exists(attachment.purchaseRequestId)
     }
 
     assert.strictEqual(purchaseRequestInfo.requestorName, payload.requestorName)
@@ -95,6 +102,23 @@ test.group('Service test cases insert purchase request service test', (group) =>
       assert.strictEqual(payload.purchaseRequestItems[index].unitCost, item.unitCost)
       assert.strictEqual(payload.purchaseRequestItems[index].totalCost, item.totalCost)
       assert.strictEqual(payload.purchaseRequestItems[index].remarks, item.remarks)
+    }
+
+    for (const [index, attachment] of purchaseRequestAttachments.entries()) {
+      assert.strictEqual(payload.purchaseRequestAttachments[index].fileName, attachment.fileName)
+      assert.strictEqual(
+        payload.purchaseRequestAttachments[index].storagePath,
+        attachment.storagePath
+      )
+      assert.strictEqual(
+        payload.purchaseRequestAttachments[index].documentType,
+        attachment.documentType
+      )
+      assert.strictEqual(payload.purchaseRequestAttachments[index].mimeType, attachment.mimeType)
+      assert.strictEqual(
+        payload.purchaseRequestAttachments[index].uploadedAt,
+        attachment.uploadedAt
+      )
     }
   })
 })

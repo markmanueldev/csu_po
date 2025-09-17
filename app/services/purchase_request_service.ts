@@ -51,9 +51,8 @@ export class PurchaseRequestService {
       const purchaseRequestItems: PurchaseRequestItem[] =
         controllerData.purchaseRequestItems as PurchaseRequestItem[]
 
-      const purchaseRequestAttachments: PurchaseRequestAttachment[] = await this.uploadAttachments(
+      const purchaseRequestAttachments: PurchaseRequestAttachment[] =
         controllerData.purchaseRequestAttachments as PurchaseRequestAttachment[]
-      )
 
       //Insert Purchase Request Info
       const insertPurchaseRequestInfo: PurchaseRequest =
@@ -68,17 +67,17 @@ export class PurchaseRequestService {
       const insertPurchaseRequestItems: PurchaseRequestItem[] =
         await this.purchaseRequestRepository.createPurchaseRequestItems(purchaseRequestItems)
       //Insert Purchase Request Attachments
-      // const insertPurchaseRequestAttachments: PurchaseRequestAttachment[] =
-      //   await this.purchaseRequestRepository.createPurchaseRequestAttachments(
-      //     purchaseRequestAttachments
-      //   )
+      const insertPurchaseRequestAttachments: PurchaseRequestAttachment[] =
+        await this.purchaseRequestRepository.createPurchaseRequestAttachments(
+          purchaseRequestAttachments
+        )
 
       return {
         purchaseRequestInfo: insertPurchaseRequestInfo,
         technicalSpecification: insertTechnicalSpecification,
         purchaseRequestLogs: insertPurchaseRequestLogs,
         purchaseRequestItems: insertPurchaseRequestItems,
-        // purchaseRequestAttachments: insertPurchaseRequestAttachments,
+        purchaseRequestAttachments: insertPurchaseRequestAttachments,
       }
     } catch (error) {
       this.logger.error('Failed to create Purchase Request', {
@@ -87,9 +86,5 @@ export class PurchaseRequestService {
       })
       throw error
     }
-  }
-
-  public async uploadAttachments(attachments: PurchaseRequestAttachment[]) {
-    this.logger.info('Uploaded Attachments', attachments)
   }
 }

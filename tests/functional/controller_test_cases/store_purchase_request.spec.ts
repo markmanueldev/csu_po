@@ -1,16 +1,16 @@
 import { test } from '@japa/runner'
-import { PurchaseRequestFormFactory } from '#tests/factories/purchase_request_api_factories/purchase_request_controller_test_factory'
-import { PurchaseRequestAPIInterface } from '../../../app/contracts/purchase_request_contracts/purchase_request_api_interface.js'
-import { ApiResponse } from '@japa/api-client'
+import { PurchaseRequestFormControllerFactory } from '#tests/factories/purchase_request_api_factories/purchase_request_controller_test_factory'
+import { PurchaseRequestControllerInterface } from '../../../app/contracts/purchase_request_controller_contracts/purchase_request_controller_interface.js'
 
 test.group('Store purchase request', () => {
   test('Testing purchase request controller', async ({ client }) => {
-    const payload: PurchaseRequestAPIInterface = PurchaseRequestFormFactory()
+    const payload: PurchaseRequestControllerInterface = PurchaseRequestFormControllerFactory()
 
-    const response: ApiResponse = await client
-      .post('/purchase-requests')
-      .form(payload)
-      .withCsrfToken()
+    console.log(typeof payload)
+
+    const response = await client.post('/purchase-requests').form(payload).withCsrfToken()
+
+    response.dump()
 
     response.assertStatus(201)
     response.assertBodyContains({
@@ -29,6 +29,16 @@ test.group('Store purchase request', () => {
       isEarlyProcurement: payload.isEarlyProcurement,
       purpose: payload.purpose,
       comments: payload.comments,
+      deliveryRequirement: payload.deliveryRequirement,
+      warranty: payload.warranty,
+      inclusions: payload.inclusions,
+      prototype: payload.prototype,
+      purchaseDate: payload.purchaseDate,
+      status: payload.status,
+      user: payload.user,
+      remarks: payload.remarks,
+      purchaseRequestItems: payload.purchaseRequestItems,
+      purchaseRequestAttachments: payload.purchaseRequestAttachments,
     })
   })
 })

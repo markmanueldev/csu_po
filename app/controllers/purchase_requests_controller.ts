@@ -10,7 +10,11 @@ import {
 } from '#validators/purchase_request_validation'
 import { errors } from '@vinejs/vine'
 import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_contracts/purchase_request_attachment_interface.js'
-import { FileParser } from '../helpers/file_attachment_converters.js'
+import {
+  ppmpFileParser,
+  priceQuotationFileParser,
+  supportingDocumentFileParser,
+} from '../helpers/file_attachment_converters.js'
 import { DateTime } from 'luxon'
 
 @inject()
@@ -41,13 +45,13 @@ export default class PurchaseRequestsController {
       })
 
       if (ppmpFile) {
-        mapFilesToAttachment.push(await FileParser(ppmpFile))
+        mapFilesToAttachment.push(await ppmpFileParser(ppmpFile))
       }
       if (priceQuotationFile) {
-        mapFilesToAttachment.push(await FileParser(priceQuotationFile))
+        mapFilesToAttachment.push(await priceQuotationFileParser(priceQuotationFile))
       }
       if (supportingDocumentFile) {
-        mapFilesToAttachment.push(await FileParser(supportingDocumentFile))
+        mapFilesToAttachment.push(await supportingDocumentFileParser(supportingDocumentFile))
       }
       const firstValidationFileData =
         await purchaseRequestFileValidator.validate(mapFilesToAttachment)
