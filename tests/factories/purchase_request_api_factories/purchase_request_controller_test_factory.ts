@@ -19,7 +19,7 @@ export function PurchaseRequestFormControllerFactory(): PurchaseRequestControlle
     isEarlyProcurement: false,
     purpose: faker.lorem.paragraph(),
     comments: faker.lorem.paragraph(),
-    deliveryRequirement: faker.lorem.sentences({ min: 1, max: 2 }),
+    deliveryRequirement: faker.lorem.sentences({ min: 1, max: 1 }),
     warranty: faker.lorem.paragraph(),
     inclusions: faker.lorem.paragraph(),
     prototype: faker.lorem.paragraph(),
@@ -53,7 +53,7 @@ export function PurchaseRequestFormControllerFactory(): PurchaseRequestControlle
         remarks: faker.lorem.paragraph(),
       },
       {
-        itemDescription: faker.lorem.sentences(),
+        itemDescription: faker.lorem.sentences({ min: 1, max: 2 }),
         unitOfMeasure: 'Lot',
         quantity: faker.number.int(100),
         unitCost: faker.number.float({ fractionDigits: 2 }),

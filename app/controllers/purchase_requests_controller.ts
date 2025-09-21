@@ -53,8 +53,9 @@ export default class PurchaseRequestsController {
       if (supportingDocumentFile) {
         mapFilesToAttachment.push(await supportingDocumentFileParser(supportingDocumentFile))
       }
-      const firstValidationFileData =
-        await purchaseRequestFileValidator.validate(mapFilesToAttachment)
+      const firstValidationFileData = await purchaseRequestFileValidator.validate({
+        purchaseRequestAttachments: mapFilesToAttachment,
+      })
       const finalValidatedFileData = {
         purchaseRequestAttachments: firstValidationFileData.purchaseRequestAttachments.map(
           (attachment) => ({
