@@ -60,9 +60,9 @@ export const purchaseRequestFileValidator = vine.compile(
     purchaseRequestAttachments: vine.array(
       vine.object({
         fileName: vine.string().trim().escape().maxLength(100).nullable(),
-        storagePath: vine.string().trim().escape(),
+        storagePath: vine.string().trim(),
         documentType: vine.enum(['PPMP', 'Price Quotation', 'Supporting Documents']),
-        mimeType: vine.string().trim().escape().maxLength(100),
+        mimeType: vine.string().trim().maxLength(100),
         uploadedAt: vine.date(),
       })
     ),

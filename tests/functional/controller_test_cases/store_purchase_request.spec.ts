@@ -3,10 +3,9 @@ import { PurchaseRequestFormControllerFactory } from '#tests/factories/purchase_
 import { PurchaseRequestControllerInterface } from '../../../app/contracts/purchase_request_controller_contracts/purchase_request_controller_interface.js'
 
 test.group('Store purchase request', () => {
-  test('Testing purchase request controller', async ({ client, assert}) => {
+  test('Testing purchase request controller', async ({ client, assert }) => {
     const payload: PurchaseRequestControllerInterface = PurchaseRequestFormControllerFactory()
     const response = await client.post('/purchase-requests').json(payload).withCsrfToken()
-
 
     response.assertStatus(201)
 
@@ -19,8 +18,5 @@ test.group('Store purchase request', () => {
     assert.isNumber(response.body().purchaseRequestInfo.purchaseRequestId)
     assert.isNumber(response.body().technicalSpecification.technicalSpecificationId)
     assert.isNumber(response.body().purchaseRequestLogs.purchaseRequestLogId)
-
-
-
   })
 })

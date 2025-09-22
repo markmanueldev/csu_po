@@ -12,7 +12,7 @@ export async function ppmpFileParser(file: MultipartFile) {
     storagePath: path,
     documentType: 'PPMP' as DocumentType,
     mimeType: file.type + '/' + file.subtype,
-    uploadedAt: DateTime.now(),
+    uploadedAt: DateTime.now().toISODate(),
   }
 }
 
@@ -24,7 +24,7 @@ export async function priceQuotationFileParser(file: MultipartFile) {
     storagePath: path,
     documentType: 'Price Quotation' as DocumentType,
     mimeType: file.type + '/' + file.subtype,
-    uploadedAt: DateTime.now(),
+    uploadedAt: DateTime.now().toISODate(),
   }
 }
 
@@ -36,6 +36,6 @@ export async function supportingDocumentFileParser(file: MultipartFile) {
     storagePath: path,
     documentType: 'Supporting Documents' as DocumentType,
     mimeType: file.type + '/' + file.subtype,
-    uploadedAt: DateTime.now(),
+    uploadedAt: DateTime.now().toISODate(),
   }
 }

@@ -52,9 +52,10 @@ export class PurchaseRequestRepository {
   }
 
   public async createTechnicalSpecifications(
-    serviceData: TechnicalSpecificationInterface
+    serviceData: TechnicalSpecification
   ): Promise<TechnicalSpecification> {
     const technicalSpecification: TechnicalSpecification = await TechnicalSpecification.create({
+      purchaseRequestId: serviceData.purchaseRequestId,
       deliveryRequirement: serviceData.deliveryRequirement,
       warranty: serviceData.warranty,
       inclusions: serviceData.inclusions,
@@ -64,9 +65,10 @@ export class PurchaseRequestRepository {
   }
 
   public async createPurchaseRequestLogs(
-    serviceData: PurchaseRequestLogInterface
+    serviceData: PurchaseRequestLog
   ): Promise<PurchaseRequestLog> {
     const purchaseRequestLog: PurchaseRequestLog = await PurchaseRequestLog.create({
+      purchaseRequestId: serviceData.purchaseRequestId,
       purchaseDate: serviceData.purchaseDate,
       status: serviceData.status,
       user: serviceData.user,

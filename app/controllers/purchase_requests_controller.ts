@@ -9,13 +9,13 @@ import {
   purchaseRequestFileValidator,
 } from '#validators/purchase_request_validation'
 import { errors } from '@vinejs/vine'
-import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_request_contracts/purchase_request_attachment_interface.js'
 import {
   ppmpFileParser,
   priceQuotationFileParser,
   supportingDocumentFileParser,
 } from '../helpers/file_attachment_converters.js'
 import { DateTime } from 'luxon'
+import { PurchaseRequestAttachmentControllerInterface } from '../contracts/purchase_request_controller_contracts/purchase_request_attachment_controller_interface.js'
 
 @inject()
 export default class PurchaseRequestsController {
@@ -30,7 +30,7 @@ export default class PurchaseRequestsController {
       const validateBodyData = await purchaseRequestBodyValidator.validate(request.body())
 
       //Validate Request Files ** STRICTLY PDF FILES OR DOCUMENT FILES ONLY **
-      let mapFilesToAttachment: PurchaseRequestAttachmentInterface[] = []
+      let mapFilesToAttachment: PurchaseRequestAttachmentControllerInterface[] = []
       const ppmpFile = request.file('ppmp', {
         size: '20mb',
         extnames: ['pdf', 'docx', 'odt', 'doc'],

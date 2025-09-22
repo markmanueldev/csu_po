@@ -34,7 +34,12 @@ export class PurchaseRequestService {
         comments: controllerData.comments as string | null,
       } as PurchaseRequest
 
+      //Insert Purchase Request Info ** Must Insert the Purchase Request Info Only first in order to have the foreign key ready
+      const insertPurchaseRequestInfo: PurchaseRequest =
+        await this.purchaseRequestRepository.createPurchaseRequestInfo(purchaseRequestOnly)
+
       const technicalSpecification: TechnicalSpecification = {
+        purchaseRequestId: insertPurchaseRequestInfo.purchaseRequestId,
         deliveryRequirement: controllerData.deliveryRequirement,
         warranty: controllerData.warranty,
         inclusions: controllerData.inclusions,
@@ -42,21 +47,30 @@ export class PurchaseRequestService {
       } as TechnicalSpecification
 
       const purchaseRequestLogs: PurchaseRequestLog = {
+        purchaseRequestId: insertPurchaseRequestInfo.purchaseRequestId,
         purchaseDate: controllerData.purchaseDate,
         status: controllerData.status,
         user: controllerData.user,
         remarks: controllerData.remarks,
       } as PurchaseRequestLog
 
-      const purchaseRequestItems: PurchaseRequestItem[] =
-        controllerData.purchaseRequestItems as PurchaseRequestItem[]
+      const purchaseRequestItems: PurchaseRequestItem[] = controllerData.purchaseRequestItems.map(
+        (item) => {
+          return {
+            ...item,
+            purchaseRequestId: insertPurchaseRequestInfo.purchaseRequestId,
+          }
+        }
+      ) as PurchaseRequestItem[]
 
       const purchaseRequestAttachments: PurchaseRequestAttachment[] =
-        controllerData.purchaseRequestAttachments as PurchaseRequestAttachment[]
+        controllerData.purchaseRequestAttachments.map((attachment) => {
+          return {
+            ...attachment,
+            purchaseRequestId: insertPurchaseRequestInfo.purchaseRequestId,
+          }
+        }) as PurchaseRequestAttachment[]
 
-      //Insert Purchase Request Info
-      const insertPurchaseRequestInfo: PurchaseRequest =
-        await this.purchaseRequestRepository.createPurchaseRequestInfo(purchaseRequestOnly)
       //Insert Technical Specification
       const insertTechnicalSpecification: TechnicalSpecification =
         await this.purchaseRequestRepository.createTechnicalSpecifications(technicalSpecification)

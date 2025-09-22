@@ -17,8 +17,8 @@ export default class extends BaseSchema {
       table.string('mime_type', 100).notNullable()
       table.dateTime('uploaded_at', { useTz: true }).notNullable().defaultTo(this.now())
 
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.timestamp('created_at').defaultTo(this.now())
+      table.timestamp('updated_at').defaultTo(this.now())
     })
   }
 
