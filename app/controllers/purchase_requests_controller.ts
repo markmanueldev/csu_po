@@ -72,7 +72,17 @@ export default class PurchaseRequestsController {
     } catch (error) {
       if (error instanceof errors.E_VALIDATION_ERROR) {
         this.logger.error(error.messages)
+        return response.status(422).json({
+          error: error.messages,
+        })
       }
+      this.logger.error('Request failed: Failed to create Purchase Request', {
+        error: error.message,
+      })
+      return response.status(500).json({
+        message: 'Internal Server Error',
+        error: 'Failed to create Purchase Request',
+      })
     }
   }
 }

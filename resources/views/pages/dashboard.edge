@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js">
+      
+    </script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">
+                ID
+              </th>
+              <th scope="col">
+                Category
+              </th>
+              <th scope="col">
+                Mode
+              </th>
+              <th scope="col">
+                Purchase Date
+              </th>
+              <th scope="col">
+                Office/College
+              </th>
+              <th scope="col">
+                Requestor By
+              </th>
+              <th scope="col">
+                Funding Source
+              </th>
+              <th scope="col">
+                Items
+              </th>
+              <th scope="col">
+                Total Amount
+              </th>
+              <th scope="col">
+                Status
+              </th>
+              <th scope="col">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <!--        <tr>-->
+            <!--          <th scope="row">1</th>-->
+            <!--          <td>Mark</td>-->
+            <!--          <td>Otto</td>-->
+            <!--          <td>@mdo</td>-->
+            <!--        </tr>-->
+
+            @each(record in records)
+              <tr>
+                <th scope="row">
+                  {{ record.id }}
+                </th>
+                <td>
+                  {{ record.category }}
+                </td>
+                <td>
+                  {{ record.mode }}
+                </td>
+                <td>
+                  {{ record.purchase_date }}
+                </td>
+                <td>
+                  {{ record.office_college }}
+                </td>
+                <td>
+                  {{ record.requested_by }}
+                </td>
+                <td>
+                  {{ record.funding_source }}
+                </td>
+                <td>
+                  {{ record.items }}
+                </td>
+                <td>
+                  {{ record.total_amount }}
+                </td>
+                <td>
+                  {{ record.status }}
+                </td>
+              </tr>
+            @end
+            
+            
+            
+            <tr>
+              <th scope="row">
+                1
+              </th>
+              <td>
+                Mark
+              </td>
+              <td>
+                Otto
+              </td>
+              <td>
+                @mdo
+              </td>
+            </tr>
+            <tr>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </body>
+
+</html>

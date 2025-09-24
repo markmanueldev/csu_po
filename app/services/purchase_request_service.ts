@@ -94,9 +94,21 @@ export class PurchaseRequestService {
         purchaseRequestAttachments: insertPurchaseRequestAttachments,
       }
     } catch (error) {
-      this.logger.error('Failed to create Purchase Request', {
+      this.logger.error('Failed to create Purchase Request in the Service Layer', {
         error: error.message,
         controllerData,
+      })
+      throw error
+    }
+  }
+
+  public async getAllPurchaseRequestData() {
+    try {
+      const allPurchaseRequestData = await this.purchaseRequestRepository.getAllPurchaseRequest()
+      return allPurchaseRequestData
+    } catch (error) {
+      this.logger.error('Failed to get Purchase Request data in the Service Layer', {
+        error: error.message,
       })
       throw error
     }

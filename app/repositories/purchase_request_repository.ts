@@ -4,9 +4,7 @@ import { PurchaseRequestAttachmentInterface } from '../contracts/purchase_reques
 import PurchaseRequestAttachment from '#models/purchase_request_models/purchase_request_attachment'
 import { PurchaseRequestItemInterface } from '../contracts/purchase_request_contracts/purchase_request_item_interface.js'
 import PurchaseRequestItem from '#models/purchase_request_models/purchase_request_item'
-import { TechnicalSpecificationInterface } from '../contracts/purchase_request_contracts/technical_specification_interface.js'
 import TechnicalSpecification from '#models/purchase_request_models/technical_specification'
-import { PurchaseRequestLogInterface } from '../contracts/purchase_request_contracts/purchase_request_log_interface.js'
 import PurchaseRequestLog from '#models/purchase_request_models/purchase_request_log'
 
 export class PurchaseRequestRepository {
@@ -36,8 +34,13 @@ export class PurchaseRequestRepository {
   public async createPurchaseRequestItems(
     serviceData: PurchaseRequestItemInterface[]
   ): Promise<PurchaseRequestItem[]> {
+    const mappedItems = serviceData.map((item) => ({
+      ...item,
+      remarks: item.remarks ?? undefined,
+    }))
+
     const purchaseRequestItem: PurchaseRequestItem[] =
-      await PurchaseRequestItem.createMany(serviceData)
+      await PurchaseRequestItem.createMany(mappedItems)
 
     return purchaseRequestItem
   }
@@ -45,8 +48,13 @@ export class PurchaseRequestRepository {
   public async createPurchaseRequestAttachments(
     serviceData: PurchaseRequestAttachmentInterface[]
   ): Promise<PurchaseRequestAttachment[]> {
+    const mappedAttachments = serviceData.map((attachment) => ({
+      ...attachment,
+      fileName: attachment.fileName ?? undefined,
+    }))
+
     const purchaseRequestAttachment: PurchaseRequestAttachment[] =
-      await PurchaseRequestAttachment.createMany(serviceData)
+      await PurchaseRequestAttachment.createMany(mappedAttachments)
 
     return purchaseRequestAttachment
   }
@@ -76,5 +84,15 @@ export class PurchaseRequestRepository {
     })
 
     return purchaseRequestLog
+  }
+
+  public async getAllPurchaseRequest() {
+    return {
+      purchaseRequestInfo: await PurchaseRequest.all(),
+      technicalSpecification: await TechnicalSpecification.all(),
+      purchaseRequestLogs: await PurchaseRequestLog.all(),
+      purchaseRequestItems: await PurchaseRequestItem.all(),
+      purchaseRequestAttachments: await PurchaseRequestAttachment.all(),
+    }
   }
 }
