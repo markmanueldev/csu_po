@@ -17,8 +17,9 @@ import {
 import { DateTime } from 'luxon'
 import { PurchaseRequestAttachmentControllerInterface } from '../contracts/purchase_request_controller_contracts/purchase_request_attachment_controller_interface.js'
 
+
 @inject()
-export default class PurchaseRequestsController {
+export default class PurchaseRequestsAPIController {
   constructor(
     protected purchaseRequestService: PurchaseRequestService,
     protected logger: Logger
@@ -79,6 +80,19 @@ export default class PurchaseRequestsController {
       this.logger.error('Request failed: Failed to create Purchase Request', {
         error: error.message,
       })
+      return response.status(500).json({
+        message: 'Internal Server Error',
+        error: 'Failed to create Purchase Request',
+      })
+    }
+  }
+
+  public async getAllPurchaseRequestData({ response }: HttpContext) {
+    try {
+      const getAllPurchaseRequest = await this.purchaseRequestService.getAllPurchaseRequestData()
+      return response.status(200).json(getAllPurchaseRequest)
+    } catch (e) {
+      this.logger.error('Request Failed: Failed to get Purchase Request')
       return response.status(500).json({
         message: 'Internal Server Error',
         error: 'Failed to create Purchase Request',
